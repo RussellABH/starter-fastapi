@@ -35,7 +35,7 @@ async def root():
 # Receive a new Request
 # TODO: Some kind of callback back to chainlink and then smart contract
 #  honestly probably not a callback and instead just some transaction since we have a request id
-@app.put("/newRequest", status_code=status.HTTP_200_OK)
+@app.post("/newRequest", status_code=status.HTTP_200_OK)
 async def newRequest(req: Request):
     # TODO: turn Request into PipelineRequest and add to pipeline's priority queue
     return {"message": "Request received"} # Probably won't be used, just look at the status code
@@ -49,7 +49,7 @@ async def giveBatch() -> BatchItem:
                  indexTuple=(0, 100), requestID=1)
 
 # Client POST labels
-@app.post("/labels", status_code=status.HTTP_202_ACCEPTED)
+@app.put("/labels", status_code=status.HTTP_202_ACCEPTED)
 async def postLabels(labels: Labels):
     # TODO: Give the labels to the consensus 
     return {"message": "Labels received"} # again probably won't be used
