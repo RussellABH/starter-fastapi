@@ -42,9 +42,9 @@ async def newRequest(req: Request):
 
 # Client GET a new Batch
 @app.get("/batch", status_code=status.HTTP_200_OK)
-async def giveBatch() -> Batch:
+async def giveBatch() -> BatchItem:
     # TODO: don't return dummy data
-    return Batch(modelUrl="https://example.com/model", 
+    return BatchItem(modelUrl="https://example.com/model", 
                  datasetUrl="https://example.com/dataset", 
                  indexTuple=(0, 100), requestID=1)
 

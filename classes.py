@@ -1,20 +1,13 @@
 from pydantic import BaseModel
 
-class Batch(BaseModel):
+class BatchItem(BaseModel):
     modelUrl: str
     datasetUrl: str
     indexTuple: tuple[int, int]
     requestID: int
-
-    def __init__(self, modelUrl, datasetUrl, indexTuple, requestID):
-        self.modelUrl = modelUrl
-        self.datasetUrl = datasetUrl
-        self.indexTuple = indexTuple
-        self.requestID = requestID
-
     
 class Pipeline():
-    #TODO: Actaully implement this
+    #TODO: Actually implement this
     def __init__(self):
         self.test = 'foo'
     
