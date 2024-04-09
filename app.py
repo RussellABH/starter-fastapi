@@ -44,8 +44,8 @@ async def newRequest(req: Request):
 @app.get("/batch", status_code=status.HTTP_200_OK)
 async def giveBatch() -> BatchItem:
     # TODO: don't return dummy data
-    return BatchItem(modelUrl="https://example.com/model", 
-                 datasetUrl="https://example.com/dataset", 
+    return BatchItem(modelUrl="https://huggingface.co/spaces/ayaanzaveri/mnist/resolve/c959fe1db8b15ed643b91856cb2db4e2a3125938/mnist-model.h5", 
+                 datasetUrl="https://drive.google.com/file/d/1P6kHVYGYd7xUTa6bW_37rdY4QHb9NDYa/view?usp=sharing", 
                  indexTuple=(0, 100), requestID=1)
 
 # Client POST labels
