@@ -93,3 +93,27 @@ def PostLabels(data: LabelReturnItem):
         return {"message": f"Labels received and consensus reached: {labels}"}
     
     return {"message": "Labels received, waiting on consensus"}
+
+
+# DEBUGGING 
+
+
+@app.get("/showlabels", status_code=status.HTTP_200_OK)
+def ShowLabels():
+    '''
+    Debugging endpoint to show the labels of the current request
+    '''
+    if not (curr_req := pipeline.get_curr_req()):
+        raise HTTPException(status_code=404, detail="No requests available") 
+
+    return curr_req.get_labels()
+
+@app.get("/showreq", status_code=status.HTTP_200_OK)
+def ShowReq():
+    '''
+    Debugging endpoint to show the current request
+    '''
+    if not (curr_req := pipeline.get_curr_req()):
+        raise HTTPException(status_code=404, detail="No requests available") 
+
+    return curr_req

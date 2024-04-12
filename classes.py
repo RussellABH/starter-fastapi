@@ -95,6 +95,10 @@ class PipelineRequest():
             return self.consensus.responseData()
         
         return None
+    
+    # Return current labels for debugging
+    def get_labels(self):
+        return {worker.address: worker.labels for worker in self.workers}
 
     # Overload comparison operators for priority queue
     def __lt__(self, other):
