@@ -90,7 +90,7 @@ class PipelineRequest():
         worker.participation = 1
 
         # Check if we have enough labels to run the consensus algorithm
-        if len(self.workers) >= MIN_WORKERS:
+        if len([w for w in self.workers if w.participation]) >= MIN_WORKERS:
             self.consensus.receiveData({worker.address: worker.labels for worker in self.workers})
             return self.consensus.responseData()
         

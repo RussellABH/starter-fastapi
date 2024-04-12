@@ -37,7 +37,6 @@ def NewRequest(req: Request):
     Receive a new Request
     TODO: Some kind of callback back to chainlink and then smart contract
      honestly probably not a callback and instead just some transaction since we have a request id  
-    TODO: Test if req has input validation
     '''
     try: # Function can raise ValueError due to bad request id
         pipeline.add_request(PipelineRequest(req))
