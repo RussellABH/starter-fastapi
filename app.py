@@ -2,9 +2,6 @@ from fastapi import FastAPI, status, HTTPException
 from fastapi.responses import FileResponse
 from web3 import Web3
 import os
-from dotenv import load_dotenv, dotenv_values 
-load_dotenv() 
- 
 
 from classes import *
 import re
@@ -95,13 +92,12 @@ def PostLabels(data: LabelReturnItem):
         # TODO: Send the labels to the smart contract
 
         # Initialize endpoint URL and create the node connection
-        node_url = os.getenv("NODE_URL")
+        node_url = process.env.NODE_URL
         web3 = Web3(Web3.HTTPProvider(node_url))
 
         # Initialize the address calling the functions/signing transactions
-        caller = os.getenv("CALLER")
-        private_key = os.getenv("PRIVATE_KEY")
-        os.getenv("NODE_URL")
+        caller = process.env.CALLER
+        private_key = process.env.PRIVATE_KEY
 
         # Initialize contract ABI and address
         abi = [{"inputs":[{"internalType":"address","name":"_tokenAddress","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"claimDividends","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"datasetSource","type":"string"},{"internalType":"string","name":"modelSource","type":"string"},{"internalType":"uint256","name":"numImages","type":"uint256"}],"name":"createRequest","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"debugInfo","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"val","type":"uint256"}],"name":"distributeDividends","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"dividends","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"requestID","type":"uint256"}],"name":"getResults","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"nextRequestID","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"nextTokenID","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"requestID","type":"uint256"},{"internalType":"string","name":"_results","type":"string"},{"internalType":"address[]","name":"_participants","type":"address[]"}],"name":"retrieveData","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"sendAllRequests","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"bytes","name":"data","type":"bytes"}],"name":"testMint","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"token","outputs":[{"internalType":"contract POVToken","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"workers","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}]
