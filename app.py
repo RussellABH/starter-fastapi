@@ -11,6 +11,8 @@ from classes import *
 import re
 
 app = FastAPI()
+
+origins = ["*"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
