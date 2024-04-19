@@ -146,7 +146,7 @@ def PostLabels(data: LabelReturnItem):
 
 
         pipeline.set_next_req()
-        return {"message": f"Labels received and consensus reached: RequestID: {requestID}, Results: {results}, Participants: {participants}"}
+        return {"message": f"Labels received and consensus reached", "RequestID": requestID, "Results": results, "Participants": participants}
     
     return {"message": "Labels received, waiting on consensus"}
 
