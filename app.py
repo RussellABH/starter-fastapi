@@ -105,43 +105,43 @@ def PostLabels(data: LabelReturnItem):
     if labels:
         # TODO: Send the labels to the smart contract
 
-        # Initialize endpoint URL and create the node connection
-        node_url = os.getenv("NODE_URL")
-        web3 = Web3(Web3.HTTPProvider(node_url))
+        # # Initialize endpoint URL and create the node connection
+        # node_url = os.getenv("NODE_URL")
+        # web3 = Web3(Web3.HTTPProvider(node_url))
 
-        # Initialize the address calling the functions/signing transactions
-        caller = os.getenv("CALLER")
-        private_key = os.getenv("PRIVATE_KEY")
-        os.getenv("NODE_URL")
+        # # Initialize the address calling the functions/signing transactions
+        # caller = os.getenv("CALLER")
+        # private_key = os.getenv("PRIVATE_KEY")
+        # os.getenv("NODE_URL")
 
-        # Initialize contract ABI and address
-        abi = [{"inputs":[{"internalType":"address","name":"_tokenAddress","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"claimDividends","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"datasetSource","type":"string"},{"internalType":"string","name":"modelSource","type":"string"},{"internalType":"uint256","name":"numImages","type":"uint256"}],"name":"createRequest","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"debugInfo","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"val","type":"uint256"}],"name":"distributeDividends","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"dividends","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"requestID","type":"uint256"}],"name":"getResults","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"nextRequestID","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"nextTokenID","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"requestID","type":"uint256"},{"internalType":"string","name":"_results","type":"string"},{"internalType":"address[]","name":"_participants","type":"address[]"}],"name":"retrieveData","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"sendAllRequests","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"bytes","name":"data","type":"bytes"}],"name":"testMint","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"token","outputs":[{"internalType":"contract POVToken","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"workers","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}]
-        contract_address = "0xD50A06b793ee173365A13e8Dae97c48E47C5F9C5"
+        # # Initialize contract ABI and address
+        # abi = [{"inputs":[{"internalType":"address","name":"_tokenAddress","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"claimDividends","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"datasetSource","type":"string"},{"internalType":"string","name":"modelSource","type":"string"},{"internalType":"uint256","name":"numImages","type":"uint256"}],"name":"createRequest","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"debugInfo","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"val","type":"uint256"}],"name":"distributeDividends","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"dividends","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"requestID","type":"uint256"}],"name":"getResults","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"nextRequestID","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"nextTokenID","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"requestID","type":"uint256"},{"internalType":"string","name":"_results","type":"string"},{"internalType":"address[]","name":"_participants","type":"address[]"}],"name":"retrieveData","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"sendAllRequests","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"bytes","name":"data","type":"bytes"}],"name":"testMint","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"token","outputs":[{"internalType":"contract POVToken","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"workers","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}]
+        # contract_address = "0xD50A06b793ee173365A13e8Dae97c48E47C5F9C5"
 
-        # Create smart contract instance
-        contract = web3.eth.contract(address=contract_address, abi=abi)
+        # # Create smart contract instance
+        # contract = web3.eth.contract(address=contract_address, abi=abi)
 
         requestID = curr_req.requestID
         results = " ".join([str(n) for n in labels])
         participants = [worker.address for worker in curr_req.workers if worker.participation]
         
-        # Initialize address nonce
-        nonce = web3.eth.get_transaction_count(caller)
+        # # Initialize address nonce
+        # nonce = web3.eth.get_transaction_count(caller)
 
-        # initialize the chain id, we need it to build the transaction for replay protection
-        Chain_id = web3.eth.chain_id
+        # # initialize the chain id, we need it to build the transaction for replay protection
+        # Chain_id = web3.eth.chain_id
 
-        # Call your function
-        call_function = contract.functions.retrieveData(requestID, results, participants).build_transaction({"chainId": Chain_id, "from": caller, "nonce": nonce})
+        # # Call your function
+        # call_function = contract.functions.retrieveData(requestID, results, participants).build_transaction({"chainId": Chain_id, "from": caller, "nonce": nonce})
 
-        # Sign transaction
-        signed_tx = web3.eth.account.sign_transaction(call_function, private_key=private_key)
+        # # Sign transaction
+        # signed_tx = web3.eth.account.sign_transaction(call_function, private_key=private_key)
 
-        # Send transaction
-        send_tx = web3.eth.send_raw_transaction(signed_tx.rawTransaction)
+        # # Send transaction
+        # send_tx = web3.eth.send_raw_transaction(signed_tx.rawTransaction)
 
-        # Wait for transaction receipt
-        tx_receipt = web3.eth.wait_for_transaction_receipt(send_tx)
+        # # Wait for transaction receipt
+        # tx_receipt = web3.eth.wait_for_transaction_receipt(send_tx)
         # print(tx_receipt) 
 
 
