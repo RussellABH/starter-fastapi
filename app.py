@@ -3,6 +3,7 @@ from fastapi.responses import FileResponse
 from web3 import Web3
 import os
 from dotenv import load_dotenv, dotenv_values 
+from fastapi.middleware.cors import CORSMiddleware
 load_dotenv() 
  
 
@@ -10,6 +11,14 @@ from classes import *
 import re
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 pipeline = Pipeline()  # initialize pipeline
 
 # TODO: Figure out a testing suite for each endpoint
